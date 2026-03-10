@@ -288,7 +288,7 @@ nav.scrolled{background:rgba(0,0,0,.93);backdrop-filter:blur(20px);border-bottom
 .loc-link:hover{gap:14px;}
 
 /* ═══ PHOTO STRIP ═══════════════════════════════════ */
-.photo-strip{display:grid;grid-template-columns:repeat(5,1fr);height:270px;overflow:hidden;}
+.photo-strip{display:grid;grid-template-columns:repeat(5,1fr);height:270px;overflow:hidden;gap:3px;background:#000;}
 .strip-c{overflow:hidden;position:relative;}
 .strip-c img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
 .strip-c:hover img{transform:scale(1.08);}
@@ -468,13 +468,15 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
   .prog-card:first-child .prog-name{font-size:22px;}
   /* TRANSFORMATIONS */
   .tf-grid{grid-template-columns:1fr 1fr;}
+  #transformations .sec-title{font-size:clamp(18px,5.5vw,28px);word-break:break-word;overflow-wrap:break-word;}
+  #transformations .sec-head{flex-direction:column;align-items:flex-start;gap:14px;}
   /* WHY US */
   .sec-title{font-size:clamp(30px,8vw,50px);}
   .why-title{font-size:clamp(30px,8vw,50px);}
   .why-grid{gap:36px;}
   .hours-box,.loc-box{padding:22px 18px;}
   /* PHOTO STRIP */
-  .photo-strip{grid-template-columns:1fr 1fr;height:auto;}
+  .photo-strip{grid-template-columns:1fr 1fr;height:auto;gap:3px;background:#000;}
   .strip-c{height:150px;}
   /* REVIEWS — swipeable scroll-snap on mobile */
   .reviews-bg{display:none;}
@@ -565,7 +567,7 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
   .join-footer{flex-direction:column;align-items:stretch;gap:12px;}
   .join-footer .btn-lime{justify-content:center;}
   .join-h{letter-spacing:-1px;}
-  .photo-strip{grid-template-columns:1fr 1fr;}
+  .photo-strip{grid-template-columns:1fr 1fr;gap:3px;background:#000;}
   .strip-c{height:120px;}
   .svc-row{grid-template-columns:1fr;gap:8px;padding:22px 0;}
   .svc-n{font-size:8px;}
@@ -914,7 +916,6 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
 
 <!-- PHOTO STRIP -->
 <div class="photo-strip">
-  <div class="strip-c"><img src="Interiror/66.webp" alt="Oxygen Gym Karunagappally" loading="lazy"></div>
   <div class="strip-c"><img src="Interiror/int7.webp" alt="Oxygen Gym" loading="lazy"></div>
   <div class="strip-c"><img src="Interiror/4.webp" alt="Oxygen Gym equipment" loading="lazy"></div>
   <div class="strip-c"><img src="Interiror/3.webp" alt="Oxygen Gym training" loading="lazy"></div>

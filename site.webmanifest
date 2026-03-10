@@ -1,0 +1,22 @@
+{
+  "name": "Oxygen Gym Veluthamanal",
+  "short_name": "Oxygen Gym",
+  "description": "Premium unisex fitness centre in Veluthamanal, Karunagappally, Kerala.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#b5ff00",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
