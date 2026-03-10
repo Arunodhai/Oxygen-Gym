@@ -178,8 +178,8 @@ nav.scrolled{background:rgba(0,0,0,.93);backdrop-filter:blur(20px);border-bottom
 /* On desktop, about-l wraps everything in left col; use flex column */
 #about{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
 .about-l{display:flex;flex-direction:column;gap:0;}
-.about-r-desktop{position:relative;}/* desktop right image */
-.about-r{display:none;}/* mobile-only inline image - hidden on desktop */
+.about-r-desktop{position:relative;}/* desktop right image - always visible on desktop */
+.about-l .about-r{display:none;}/* mobile-only inline image - hidden on desktop */
 .about-title{font-family:'Syne',sans-serif;font-size:clamp(36px,3.8vw,50px);font-weight:800;line-height:1.0;text-transform:uppercase;letter-spacing:-1.5px;margin-bottom:24px;}
 .about-title span{color:var(--lime);}
 .about-body{font-size:14px;line-height:1.85;color:var(--g1);margin-bottom:32px;}
@@ -399,7 +399,7 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
   .hero-stats{margin-top:32px;}
   #about{grid-template-columns:1fr;padding:60px 36px;}
   .about-r-desktop{display:none !important;}/* hide desktop right column image */
-  .about-r{display:block;margin:20px 0 24px;position:relative;}/* show inline mobile image */
+  .about-l .about-r{display:block;margin:20px 0 24px;position:relative;}/* show inline mobile image */
   .a-img-main{width:100%;aspect-ratio:16/9;object-fit:cover;max-height:340px;}
   .a-img-thumb{width:90px;height:90px;bottom:-12px;left:-12px;}
   .a-float{top:16px;right:-10px;padding:14px 16px;}
