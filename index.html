@@ -54,8 +54,8 @@
   --g3:#444;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none;}
+html{scroll-behavior:smooth;overflow-x:hidden;}
+body{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none;max-width:100vw;}
 ::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--black);}::-webkit-scrollbar-thumb{background:var(--lime);}
 img{display:block;max-width:100%;}
 a{text-decoration:none;}
@@ -124,7 +124,7 @@ nav.scrolled{background:rgba(0,0,0,.93);backdrop-filter:blur(20px);border-bottom
 #hero{min-height:100svh;display:grid;grid-template-columns:1fr 1fr;overflow:hidden;position:relative;}
 .hero-l{background:var(--black);display:flex;flex-direction:column;justify-content:flex-end;position:relative;z-index:4;}
 .hero-l-inner{padding:148px 56px 0;flex:1;display:flex;flex-direction:column;justify-content:center;gap:28px;}
-.hero-eyebrow{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--lime);display:flex;align-items:center;gap:14px;}
+.hero-eyebrow{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--lime);display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
 .hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--lime);}
 .hero-h1{font-family:'Syne',sans-serif;font-size:clamp(42px,7vw,92px);font-weight:800;line-height:.92;text-transform:uppercase;letter-spacing:-2px;opacity:0;animation:slideUp .9s .3s forwards;}
 .hero-h1 .lime{color:var(--lime);display:block;}
@@ -163,7 +163,7 @@ nav.scrolled{background:rgba(0,0,0,.93);backdrop-filter:blur(20px);border-bottom
 @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
 
 /* ═══ TICKER ════════════════════════════════════════════ */
-.ticker{background:var(--lime);overflow:hidden;padding:12px 0;}
+.ticker{background:var(--lime);overflow:hidden;padding:12px 0;width:100%;}
 .ticker-t{display:flex;width:max-content;animation:tickroll 24s linear infinite;}
 .ticker-item{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--black);padding:0 28px;white-space:nowrap;display:inline-flex;align-items:center;gap:28px;}
 .ticker-dot{display:inline-block;width:3px;height:3px;background:rgba(0,0,0,.3);border-radius:50%;}
@@ -171,6 +171,12 @@ nav.scrolled{background:rgba(0,0,0,.93);backdrop-filter:blur(20px);border-bottom
 
 /* ═══ ABOUT ════════════════════════════════════════════ */
 #about{padding:110px 52px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;border-bottom:1px solid rgba(181,255,0,.06);}
+.about-l{display:contents;}/* flatten on desktop so top/bottom act as direct grid children workaround */
+/* On desktop, about-l wraps everything in left col; use flex column */
+#about{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.about-l{display:flex;flex-direction:column;gap:0;}
+.about-r-desktop{position:relative;}/* desktop right image */
+.about-r{display:none;}/* mobile-only inline image - hidden on desktop */
 .about-title{font-family:'Syne',sans-serif;font-size:clamp(36px,3.8vw,50px);font-weight:800;line-height:1.0;text-transform:uppercase;letter-spacing:-1.5px;margin-bottom:24px;}
 .about-title span{color:var(--lime);}
 .about-body{font-size:14px;line-height:1.85;color:var(--g1);margin-bottom:32px;}
@@ -392,8 +398,9 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
   .hero-badge .bn{font-size:28px;}
   .hero-badge .bs{font-size:7px;}
   .hero-stats{margin-top:32px;}
-  #about{grid-template-columns:1fr;}
-  .about-r{display:block;margin-top:16px;}
+  #about{grid-template-columns:1fr;padding:60px 36px;}
+  .about-r-desktop{display:none;}/* hide desktop right column image */
+  .about-r{display:block;margin:20px 0 24px;position:relative;}/* show inline mobile image */
   .a-img-main{width:100%;aspect-ratio:16/9;object-fit:cover;max-height:340px;}
   .a-img-thumb{width:90px;height:90px;bottom:-12px;left:-12px;}
   .a-float{top:16px;right:-10px;padding:14px 16px;}
@@ -423,9 +430,9 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
   #about,#services,#membership,#programs,#transformations,#why,#reviews{padding:60px 20px;}
   .hero-l-inner{padding:100px 20px 36px;gap:20px;}
   .hero-badge{display:none;}
-  .a-img-main{max-height:280px;}
+  .a-img-main{max-height:260px;}
   .a-float{display:none;}
-  .a-img-thumb{width:80px;height:80px;}
+  .a-img-thumb{width:72px;height:72px;bottom:-10px;left:-10px;}
   .hero-copy{font-size:13px;}
   .hero-actions{gap:10px;}
   .hero-actions .btn-lime,.hero-actions .btn-outline{padding:12px 22px;font-size:9px;}
@@ -650,22 +657,32 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
 
 <!-- ABOUT -->
 <section id="about">
-  <div class="rev-l">
-    <div class="s-label">About Us</div>
-    <h2 class="about-title">Where Every<br><span>Breath</span> Fuels<br>Your Best.</h2>
-    <p class="about-body">About Oxygen Gym
-      Located in the heart of Veluthamanal, Karunagappally, Oxygen Gym is a premier 5-star fitness destination designed for those who demand excellence. Our state-of-the-art, fully air-conditioned facility combines a high-energy "billionaire vibe" with elite equipment, creating a modern and motivating environment for every member of the community.<br><br>Whether your goal is weight management, professional bodybuilding, or overall wellness, our expert, supportive trainers provide the personalized guidance you need to succeed. We pride ourselves on maintaining a clean, inclusive, and professional space where beginners and athletes alike can breathe life into their fitness journey and achieve lasting transformations.</p>
-    <div class="chips">
-      <span class="chip">Unisex Facility</span>
-      <span class="chip">Certified Trainers</span>
-      <span class="chip">Modern Equipment</span>
-      <span class="chip">Wheelchair Accessible</span>
-      <span class="chip">7 Days Open</span>
-      <span class="chip">Personal Training</span>
+  <div class="about-l">
+    <div class="about-top rev-l">
+      <div class="s-label">About Us</div>
+      <h2 class="about-title">Where Every<br><span>Breath</span> Fuels<br>Your Best.</h2>
     </div>
-    <a href="#" class="btn-lime open-join">Join Oxygen Gym <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    <div class="about-r rev-r">
+      <div class="a-corner"></div>
+      <img src="Interiror/66.webp" alt="Oxygen Gym interior Veluthamanal" class="a-img-main" loading="lazy">
+      <img src="logo.png" alt="Oxygen Gym logo" class="a-img-thumb" loading="lazy">
+      <div class="a-float"><span class="fn">5★</span><span class="fl">Google<br>Rating</span></div>
+    </div>
+    <div class="about-bottom rev-l">
+      <p class="about-body">About Oxygen Gym
+        Located in the heart of Veluthamanal, Karunagappally, Oxygen Gym is a premier 5-star fitness destination designed for those who demand excellence. Our state-of-the-art, fully air-conditioned facility combines a high-energy "billionaire vibe" with elite equipment, creating a modern and motivating environment for every member of the community.<br><br>Whether your goal is weight management, professional bodybuilding, or overall wellness, our expert, supportive trainers provide the personalized guidance you need to succeed. We pride ourselves on maintaining a clean, inclusive, and professional space where beginners and athletes alike can breathe life into their fitness journey and achieve lasting transformations.</p>
+      <div class="chips">
+        <span class="chip">Unisex Facility</span>
+        <span class="chip">Certified Trainers</span>
+        <span class="chip">Modern Equipment</span>
+        <span class="chip">Wheelchair Accessible</span>
+        <span class="chip">7 Days Open</span>
+        <span class="chip">Personal Training</span>
+      </div>
+      <a href="#" class="btn-lime open-join">Join Oxygen Gym <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
   </div>
-  <div class="about-r rev-r">
+  <div class="about-r about-r-desktop rev-r">
     <div class="a-corner"></div>
     <img src="Interiror/66.webp" alt="Oxygen Gym interior Veluthamanal" class="a-img-main" loading="lazy">
     <img src="logo.png" alt="Oxygen Gym logo" class="a-img-thumb" loading="lazy">
