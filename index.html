@@ -132,6 +132,7 @@ nav.scrolled{background:rgba(0,0,0,.93);backdrop-filter:blur(20px);border-bottom
 .hero-copy{font-size:14px;line-height:1.8;color:var(--g1);max-width:420px;opacity:0;animation:slideUp .9s .55s forwards;}
 .hero-actions{display:flex;gap:12px;flex-wrap:wrap;opacity:0;animation:slideUp .9s .7s forwards;}
 .hero-top{display:flex;flex-direction:column;gap:28px;}
+.hero-mid{display:flex;flex-direction:column;gap:20px;}
 .hero-stats{display:flex;border-top:1px solid rgba(181,255,0,.1);margin-top:0;}
 .hstat{flex:1;padding:22px 0;border-right:1px solid rgba(181,255,0,.08);}
 .hstat:last-child{border-right:none;}
@@ -336,7 +337,7 @@ nav.scrolled{background:rgba(0,0,0,.93);backdrop-filter:blur(20px);border-bottom
 
 /* ═══ CTA BAND ══════════════════════════════════════ */
 #cta .cta-band{background:var(--lime);padding:80px 52px;display:flex;align-items:center;justify-content:space-between;gap:48px;position:relative;overflow:hidden;}
-#cta .cta-band::before{content:'OXYGEN';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:'Syne',sans-serif;font-size:clamp(120px,16vw,300px);font-weight:800;color:rgba(0,0,0,.07);line-height:1;pointer-events:none;white-space:nowrap;}
+#cta .cta-band::before{content:'OXYGEN';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:'Syne',sans-serif;font-size:clamp(80px,16vw,300px);font-weight:800;color:rgba(0,0,0,.07);line-height:1;pointer-events:none;white-space:nowrap;}
 .cta-text h2{font-family:'Syne',sans-serif;font-size:clamp(32px,4.5vw,54px);font-weight:800;text-transform:uppercase;letter-spacing:-2px;color:var(--black);line-height:.92;margin-bottom:14px;}
 .cta-text p{font-size:14px;color:rgba(0,0,0,.58);max-width:480px;line-height:1.65;}
 .cta-acts{display:flex;flex-direction:column;gap:14px;align-items:flex-start;flex-shrink:0;position:relative;z-index:1;}
@@ -397,7 +398,6 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
   .hero-badge{bottom:28px;right:24px;padding:14px 18px;}
   .hero-badge .bn{font-size:28px;}
   .hero-badge .bs{font-size:7px;}
-  .hero-stats{margin-top:32px;}
   #about{grid-template-columns:1fr;padding:60px 36px;}
   .about-r-desktop{display:none !important;}/* hide desktop right column image */
   .about-l .about-r{display:block;margin:20px 0 24px;position:relative;}/* show inline mobile image */
@@ -434,14 +434,20 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
   #about,#services,#membership,#programs,#transformations,#why,#reviews{padding:56px 20px;}
   /* HERO */
   .hero-l{min-height:100svh;}
-  .hero-l-inner{padding:80px 20px 52px;gap:0;}
-  .hero-top{gap:16px;}
+  .hero-l-inner{padding:72px 24px 24px;gap:32px;justify-content:center;display:flex;flex-direction:column;align-items:center;text-align:center;}
+  .hero-r-grad{background:linear-gradient(to bottom,rgba(0,0,0,.85) 0%,rgba(0,0,0,.5) 45%,rgba(0,0,0,.75) 100%) !important;}
+  .hero-r-img{filter:brightness(.72) saturate(.9) !important;}
+  .hero-top{gap:12px;width:100%;flex:0 0 auto;}
+  .hero-eyebrow{justify-content:center;}
+  .hero-eyebrow::before{display:none;}
+  .hero-mid{gap:16px;width:100%;flex:0 0 auto;}
+  .hero-copy{max-width:100%;font-size:13px;text-align:center;}
+  .hero-stats{margin-top:0;width:100%;flex:0 0 auto;}
   .hero-badge{display:none;}
-  .hero-copy{font-size:13px;}
-  .hero-actions{flex-direction:row;flex-wrap:wrap;gap:8px;}
-  .hero-actions .btn-lime,.hero-actions .btn-outline,.hero-actions .btn-ghost-w{flex:1;min-width:0;justify-content:center;padding:12px 10px;font-size:9px;letter-spacing:1.5px;}
-  .hero-stats{flex-wrap:wrap;margin-top:0;}
-  .hstat{flex:1 1 calc(50% - 1px);padding:14px 0;}
+  .hero-h1{font-size:clamp(48px,13vw,78px);}
+  .hero-actions{flex-direction:row;flex-wrap:wrap;gap:8px;justify-content:center;}
+  .hero-actions .btn-lime,.hero-actions .btn-outline,.hero-actions .btn-ghost-w{flex:1;min-width:0;justify-content:center;padding:13px 10px;font-size:9px;letter-spacing:1.5px;}
+  .hstat{flex:1 1 calc(50% - 1px);padding:20px 0;text-align:center;}
   .hstat-n{font-size:22px;}
   .hstat-l{font-size:7px;}
   /* ABOUT */
@@ -505,8 +511,9 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
   .reviews-dots span{width:6px;height:6px;border-radius:50%;background:rgba(181,255,0,.25);transition:background .2s;}
   .reviews-dots span.active{background:var(--lime);}
   /* CTA */
-  #cta .cta-band{padding:52px 20px;}
-  .cta-text h2{letter-spacing:-1px;}
+  #cta .cta-band{padding:52px 20px;overflow:hidden;}
+  .cta-text h2{font-size:clamp(26px,8vw,40px);letter-spacing:-1px;word-break:break-word;}
+  .cta-text p{font-size:13px;}
   /* FOOTER */
   footer{padding:52px 20px 28px;}
   .foot-bottom{flex-direction:column;align-items:flex-start;gap:14px;}
@@ -526,16 +533,18 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
   .nav-logo-sq img{height:28px;max-width:120px;}
   .mob-drawer{top:56px;padding:24px 20px 48px;}
   .mob-drawer ul li a{font-size:20px;letter-spacing:0;}
-  .hero-l-inner{padding:72px 16px 44px;}
-  .hero-top{gap:14px;}
-  .hero-h1{letter-spacing:-1.5px;}
-  .hero-copy{font-size:13px;max-width:100%;}
-  .hero-actions{flex-direction:row;gap:7px;}
+  .hero-l-inner{padding:68px 18px 20px;justify-content:center;gap:28px;align-items:center;text-align:center;}
+  .hero-top{gap:10px;width:100%;}
+  .hero-mid{gap:14px;width:100%;}
+  .hero-h1{font-size:clamp(42px,13.5vw,66px);letter-spacing:-1.5px;}
+  .hero-copy{font-size:13px;max-width:100%;text-align:center;}
+  .hero-actions{flex-direction:row;gap:7px;justify-content:center;}
   .hero-actions .btn-lime,.hero-actions .btn-outline,.hero-actions .btn-ghost-w{padding:11px 8px;font-size:8px;letter-spacing:1.2px;}
-  .hero-stats{flex-wrap:wrap;}
-  .hstat{flex:1 1 50%;min-width:0;}
+  .hero-stats{flex-wrap:wrap;width:100%;margin-top:0;}
+  .hstat{flex:1 1 50%;min-width:0;text-align:center;}
   .hstat:nth-child(2){border-right:none;}
   .hstat:nth-child(3){border-right:1px solid rgba(181,255,0,.08);}
+  .hstat-n-icon{display:flex;justify-content:center;}
   .hstat-n{font-size:20px;}
   .hstat-l{font-size:7px;letter-spacing:1.5px;}
   #about,#services,#membership,#programs,#transformations,#why,#reviews{padding:52px 16px;}
@@ -651,6 +660,8 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
           <span class="lime">BEYOND</span>
           <span class="stroke">LIMITS.</span>
         </h1>
+      </div>
+      <div class="hero-mid">
         <p class="hero-copy">A highly-rated professional fitness centre/ Gym at Veluthamanal junction, Karunagappalli — expert coaches, modern equipment, and an inclusive wheelchair-accessible space.</p>
         <div class="hero-actions">
           <a href="#" class="btn-lime open-join">Join Now <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
@@ -971,7 +982,7 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
 <section id="cta">
   <div class="cta-band rev">
     <div class="cta-text">
-      <h2>READY FOR <br> AN ELITE<br>TRANSFORMATION?</h2>
+      <h2>ARE YOU READY <br> TO UNLEASH<br>YOUR POWER?</h2>
       <p>Join Oxygen Gym — Karunagappally’s premier 5-star fitness center in Veluthamanal. Experience elite coaching and world-class equipment, open daily for your transformation.</p>
     </div>
     <div class="cta-acts">
