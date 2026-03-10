@@ -93,7 +93,7 @@ nav.scrolled{background:rgba(0,0,0,.93);backdrop-filter:blur(20px);border-bottom
 .mob-drawer.open{transform:translateX(0);}
 .mob-drawer ul{list-style:none;flex:1;}
 .mob-drawer ul li{border-bottom:1px solid rgba(181,255,0,.07);}
-.mob-drawer ul li a{display:block;padding:18px 0;font-family:'Syne',sans-serif;font-size:32px;font-weight:800;text-transform:uppercase;color:var(--white);transition:color .2s,padding-left .2s;letter-spacing:-1px;}
+.mob-drawer ul li a{display:block;padding:16px 0;font-family:'Syne',sans-serif;font-size:26px;font-weight:800;text-transform:uppercase;color:var(--white);transition:color .2s,padding-left .2s;letter-spacing:-.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .mob-drawer ul li a:hover{color:var(--lime);padding-left:8px;}
 .mob-drawer-footer{margin-top:32px;display:flex;flex-direction:column;gap:12px;}
 .mob-cta{background:var(--lime);color:var(--black);font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:16px 24px;text-align:center;}
@@ -122,8 +122,8 @@ nav.scrolled{background:rgba(0,0,0,.93);backdrop-filter:blur(20px);border-bottom
 
 /* ═══ HERO ════════════════════════════════════════════════ */
 #hero{min-height:100svh;display:grid;grid-template-columns:1fr 1fr;overflow:hidden;position:relative;}
-.hero-l{background:var(--black);display:flex;flex-direction:column;justify-content:flex-end;position:relative;z-index:4;}
-.hero-l-inner{padding:148px 56px 0;flex:1;display:flex;flex-direction:column;justify-content:center;gap:28px;padding-bottom:60px;}
+.hero-l{background:var(--black);display:flex;flex-direction:column;position:relative;z-index:4;}
+.hero-l-inner{padding:148px 56px 60px;flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:0;}
 .hero-eyebrow{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--lime);display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
 .hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--lime);}
 .hero-h1{font-family:'Syne',sans-serif;font-size:clamp(42px,7vw,92px);font-weight:800;line-height:.92;text-transform:uppercase;letter-spacing:-2px;opacity:0;animation:slideUp .9s .3s forwards;}
@@ -131,7 +131,8 @@ nav.scrolled{background:rgba(0,0,0,.93);backdrop-filter:blur(20px);border-bottom
 .hero-h1 .stroke{-webkit-text-stroke:1.5px var(--white);color:transparent;display:block;}
 .hero-copy{font-size:14px;line-height:1.8;color:var(--g1);max-width:420px;opacity:0;animation:slideUp .9s .55s forwards;}
 .hero-actions{display:flex;gap:12px;flex-wrap:wrap;opacity:0;animation:slideUp .9s .7s forwards;}
-.hero-stats{display:flex;border-top:1px solid rgba(181,255,0,.1);margin-top:48px;}
+.hero-top{display:flex;flex-direction:column;gap:28px;}
+.hero-stats{display:flex;border-top:1px solid rgba(181,255,0,.1);margin-top:0;}
 .hstat{flex:1;padding:22px 0;border-right:1px solid rgba(181,255,0,.08);}
 .hstat:last-child{border-right:none;}
 .hstat-n{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--lime);line-height:1;}
@@ -431,13 +432,15 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
   .mob-drawer{top:60px;}
   /* SECTIONS */
   #about,#services,#membership,#programs,#transformations,#why,#reviews{padding:56px 20px;}
-  /* HERO — side-by-side buttons, tighter layout */
-  .hero-l-inner{padding:100px 20px 28px;gap:18px;}
+  /* HERO */
+  .hero-l{min-height:100svh;}
+  .hero-l-inner{padding:80px 20px 52px;gap:0;}
+  .hero-top{gap:16px;}
   .hero-badge{display:none;}
   .hero-copy{font-size:13px;}
-  .hero-actions{flex-direction:row;flex-wrap:wrap;gap:10px;}
-  .hero-actions .btn-lime,.hero-actions .btn-outline,.hero-actions .btn-ghost-w{flex:1;min-width:0;justify-content:center;padding:12px 14px;font-size:9px;}
-  .hero-stats{flex-wrap:wrap;margin-top:16px;}
+  .hero-actions{flex-direction:row;flex-wrap:wrap;gap:8px;}
+  .hero-actions .btn-lime,.hero-actions .btn-outline,.hero-actions .btn-ghost-w{flex:1;min-width:0;justify-content:center;padding:12px 10px;font-size:9px;letter-spacing:1.5px;}
+  .hero-stats{flex-wrap:wrap;margin-top:0;}
   .hstat{flex:1 1 calc(50% - 1px);padding:14px 0;}
   .hstat-n{font-size:22px;}
   .hstat-l{font-size:7px;}
@@ -471,12 +474,36 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
   /* PHOTO STRIP */
   .photo-strip{grid-template-columns:1fr 1fr;height:auto;}
   .strip-c{height:150px;}
-  /* REVIEWS — stacked grid instead of carousel */
+  /* REVIEWS — swipeable scroll-snap on mobile */
   .reviews-bg{display:none;}
+  .reviews-hd{margin-bottom:28px;}
+  #reviews{padding:52px 0 52px 20px;}
   .reviews-grid{overflow:visible;}
-  .reviews-track{animation:none !important;display:grid;grid-template-columns:1fr 1fr;width:100%;gap:12px;will-change:auto;}
+  .reviews-track{
+    animation:none !important;
+    display:flex;
+    width:100%;
+    gap:12px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    padding-right:20px;
+    padding-bottom:4px;
+    will-change:auto;
+  }
+  .reviews-track::-webkit-scrollbar{display:none;}
   .r-card[aria-hidden="true"]{display:none !important;}
-  .r-card{flex:none;max-width:none;flex-basis:auto;}
+  .r-card{
+    flex:0 0 80vw;
+    max-width:80vw;
+    scroll-snap-align:start;
+    padding:24px 20px;
+  }
+  /* Dot indicators */
+  .reviews-dots{display:flex;justify-content:center;gap:6px;margin-top:20px;padding-right:20px;}
+  .reviews-dots span{width:6px;height:6px;border-radius:50%;background:rgba(181,255,0,.25);transition:background .2s;}
+  .reviews-dots span.active{background:var(--lime);}
   /* CTA */
   #cta .cta-band{padding:52px 20px;}
   .cta-text h2{letter-spacing:-1px;}
@@ -498,14 +525,14 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
   .nav-logo-sq{height:28px;}
   .nav-logo-sq img{height:28px;max-width:120px;}
   .mob-drawer{top:56px;padding:24px 20px 48px;}
-  .mob-drawer ul li a{font-size:24px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;display:block;}
-  .hero-l-inner{padding:84px 16px 24px;gap:14px;}
+  .mob-drawer ul li a{font-size:20px;letter-spacing:0;}
+  .hero-l-inner{padding:72px 16px 44px;}
+  .hero-top{gap:14px;}
   .hero-h1{letter-spacing:-1.5px;}
   .hero-copy{font-size:13px;max-width:100%;}
-  .hero-actions{flex-direction:row;gap:8px;}
-  .hero-actions .btn-lime,.hero-actions .btn-outline,.hero-actions .btn-ghost-w{padding:12px 10px;font-size:8px;letter-spacing:1.5px;}
-  .hero-actions .btn-lime,.hero-actions .btn-outline,.hero-actions .btn-ghost-w{padding:12px 10px;font-size:8px;letter-spacing:1.5px;}
-  .hero-stats{flex-wrap:wrap;border-top:1px solid rgba(181,255,0,.1);}
+  .hero-actions{flex-direction:row;gap:7px;}
+  .hero-actions .btn-lime,.hero-actions .btn-outline,.hero-actions .btn-ghost-w{padding:11px 8px;font-size:8px;letter-spacing:1.2px;}
+  .hero-stats{flex-wrap:wrap;}
   .hstat{flex:1 1 50%;min-width:0;}
   .hstat:nth-child(2){border-right:none;}
   .hstat:nth-child(3){border-right:1px solid rgba(181,255,0,.08);}
@@ -617,17 +644,19 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
 <section id="hero">
   <div class="hero-l">
     <div class="hero-l-inner">
-      <div class="hero-eyebrow">Premium Unisex Fitness Centre — Veluthamanal, Karunagappally</div>
-      <h1 class="hero-h1">
-        PUSH<br>
-        <span class="lime">BEYOND</span>
-        <span class="stroke">LIMITS.</span>
-      </h1>
-      <p class="hero-copy">A highly-rated professional fitness centre/ Gym at Veluthamanal junction, Karunagappalli — expert coaches, modern equipment, and an inclusive wheelchair-accessible space.</p>
-      <div class="hero-actions">
-        <a href="#" class="btn-lime open-join">Join Now <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
-        <a href="#about" class="btn-outline">Explore →</a>
-        <a href="tel:+916238159885" class="btn-ghost-w" style="color:var(--lime);border-color:rgba(181,255,0,.35);"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 3L5 2C5.5 3.5 6 5 6 5.5C5.5 6 5 6.5 5.5 7.5C6 8.5 7 9.5 8 10C9 10.5 9.5 10 10 9.5C10.5 9 12 9.5 13.5 10L12.5 12C10.5 13 7.5 12.5 5 10C2.5 7.5 2 4.5 3 3Z" stroke="var(--lime)" stroke-width="1.3"/></svg> Call</a>
+      <div class="hero-top">
+        <div class="hero-eyebrow">Premium Unisex Fitness Centre — Veluthamanal, Karunagappally</div>
+        <h1 class="hero-h1">
+          PUSH<br>
+          <span class="lime">BEYOND</span>
+          <span class="stroke">LIMITS.</span>
+        </h1>
+        <p class="hero-copy">A highly-rated professional fitness centre/ Gym at Veluthamanal junction, Karunagappalli — expert coaches, modern equipment, and an inclusive wheelchair-accessible space.</p>
+        <div class="hero-actions">
+          <a href="#" class="btn-lime open-join">Join Now <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+          <a href="#about" class="btn-outline">Explore →</a>
+          <a href="tel:+916238159885" class="btn-ghost-w" style="color:var(--lime);border-color:rgba(181,255,0,.35);"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 3L5 2C5.5 3.5 6 5 6 5.5C5.5 6 5 6.5 5.5 7.5C6 8.5 7 9.5 8 10C9 10.5 9.5 10 10 9.5C10.5 9 12 9.5 13.5 10L12.5 12C10.5 13 7.5 12.5 5 10C2.5 7.5 2 4.5 3 3Z" stroke="var(--lime)" stroke-width="1.3"/></svg> Call</a>
+        </div>
       </div>
       <div class="hero-stats">
         <div class="hstat"><div class="hstat-n">5★</div><div class="hstat-l">Google Rating</div></div>
@@ -906,6 +935,7 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
       <div class="r-card" aria-hidden="true"><div class="r-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="r-quote">"Good gym and good trainer. The equipment is modern and the guidance provided by the staff is very helpful for beginners."</p><div class="r-author"><div class="r-av">N</div><div><div class="r-name">Naif</div><div class="r-meta">Member Review</div></div></div></div>
     </div>
   </div>
+  <div class="reviews-dots" id="reviewsDots"></div>
 </section>
 
 <!-- JOIN MODAL -->
@@ -1036,7 +1066,18 @@ const togM=f=>{const o=f!==undefined?f:!mBtn.classList.contains('open');mBtn.cla
 mBtn.addEventListener('click',()=>togM());
 document.querySelectorAll('.mob-link').forEach(l=>l.addEventListener('click',()=>togM(false)));
 
-// FORM
+// REVIEW DOTS
+const track=document.querySelector('.reviews-track'),dotsWrap=document.getElementById('reviewsDots');
+if(track&&dotsWrap){
+  const cards=[...track.querySelectorAll('.r-card:not([aria-hidden])')];
+  cards.forEach((_,i)=>{const d=document.createElement('span');if(i===0)d.classList.add('active');dotsWrap.appendChild(d);});
+  const dots=[...dotsWrap.querySelectorAll('span')];
+  track.addEventListener('scroll',()=>{
+    const idx=Math.round(track.scrollLeft/(track.scrollWidth/cards.length));
+    dots.forEach((d,i)=>d.classList.toggle('active',i===idx));
+  },{passive:true});
+}
+
 const form=document.getElementById('leadForm'),st=document.getElementById('jStatus');
 if(form){form.addEventListener('submit',async e=>{
   e.preventDefault();st.textContent='Submitting...';
