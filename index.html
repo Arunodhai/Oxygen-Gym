@@ -135,11 +135,23 @@ nav.scrolled{background:rgba(0,0,0,.93);backdrop-filter:blur(20px);border-bottom
 .hstat{flex:1;padding:22px 0;border-right:1px solid rgba(181,255,0,.08);}
 .hstat:last-child{border-right:none;}
 .hstat-n{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--lime);line-height:1;}
+.hstat-n-icon{line-height:0;}
+.hstat-wheel{width:26px;height:26px;display:block;}
+.hstat-wheel .wheel-circle{fill:var(--black);stroke:var(--lime);stroke-width:1.8;}
+.hstat-wheel .wheel-lines{stroke:var(--lime);stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round;}
 .hstat-l{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--g3);margin-top:5px;line-height:1.5;}
 .hero-r{position:relative;overflow:hidden;}
-.hero-r-img{position:absolute;inset:0;background:url('mob.png') center/cover no-repeat;filter:brightness(.55) saturate(.8);animation:kZoom 22s ease-in-out infinite;}
+.hero-r-img{position:absolute;inset:0;filter:brightness(.55) saturate(.8);opacity:0;animation:kZoom 22s ease-in-out infinite,heroFade 18s ease-in-out infinite;}
+.hero-r-img.img-1{background:url('int2.jpg') center/cover no-repeat;animation-delay:0s,0s;}
+.hero-r-img.img-2{background:url('tf.jpg') center/cover no-repeat;animation-delay:0s,6s;}
+.hero-r-img.img-3{background:url('bbl.jpg') center/cover no-repeat;animation-delay:0s,12s;}
 .hero-r-grad{position:absolute;inset:0;background:linear-gradient(90deg,var(--black) 0%,transparent 30%,transparent 70%,rgba(0,0,0,.4) 100%);}
-@keyframes kZoom{0%,100%{transform:scale(1.05);}50%{transform:scale(1.0);}}
+@keyframes kZoom{0%,100%{transform:scaleX(-1) scale(1.05);}50%{transform:scaleX(-1) scale(1.0);}}
+@keyframes heroFade{
+  0%,3%{opacity:0;}
+  8%,36%{opacity:1;}
+  42%,100%{opacity:0;}
+}
 .hero-badge{position:absolute;bottom:40px;right:40px;background:var(--lime);padding:18px 22px;text-align:center;z-index:5;}
 .hero-badge .bn{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:var(--black);line-height:1;display:block;}
 .hero-badge .bs{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--black);display:block;margin-top:3px;}
@@ -176,20 +188,18 @@ nav.scrolled{background:rgba(0,0,0,.93);backdrop-filter:blur(20px);border-bottom
 #services{padding:100px 52px;border-bottom:1px solid rgba(181,255,0,.06);}
 .sec-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px;}
 .sec-title{font-family:'Syne',sans-serif;font-size:clamp(36px,3.8vw,50px);font-weight:800;text-transform:uppercase;letter-spacing:-1.5px;}
-.svc-list{display:flex;flex-direction:column;}
-.svc-row{display:grid;grid-template-columns:72px 1fr 28px;align-items:center;gap:32px;padding:26px 0;border-bottom:1px solid rgba(181,255,0,.07);cursor:default;position:relative;transition:padding-left .25s;}
-.svc-row:first-child{border-top:1px solid rgba(181,255,0,.07);}
+.svc-list{display:grid;grid-template-columns:1fr 1fr;column-gap:28px;}
+.svc-row{display:grid;grid-template-columns:72px 1fr;align-items:center;gap:32px;padding:26px 0;border-bottom:1px solid rgba(181,255,0,.07);cursor:default;position:relative;transition:padding-left .25s;}
+.svc-row:nth-child(-n+2){border-top:1px solid rgba(181,255,0,.07);}
 .svc-row::before{content:'';position:absolute;inset:0;background:rgba(181,255,0,.04);opacity:0;transition:opacity .3s;}
 .svc-row:hover{padding-left:12px;}
 .svc-row:hover::before{opacity:1;}
 .svc-row:hover .svc-n{color:var(--lime);}
-.svc-row:hover .svc-arr{opacity:1;transform:translateX(0);}
-.svc-n{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1.5px;color:var(--g3);transition:color .3s;position:relative;z-index:1;}
+.svc-n{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1.5px;color:var(--lime);transition:color .3s;position:relative;z-index:1;}
 .svc-body{position:relative;z-index:1;}
 .svc-name{font-family:'Syne',sans-serif;font-size:21px;font-weight:700;text-transform:uppercase;letter-spacing:-.3px;margin-bottom:5px;}
 .svc-desc{font-size:13px;line-height:1.65;color:var(--g1);max-width:600px;}
-.svc-arr{opacity:0;transform:translateX(-10px);transition:opacity .3s,transform .3s;position:relative;z-index:1;}
-.svc-arr svg{width:22px;height:22px;stroke:var(--lime);fill:none;stroke-width:1.5;}
+.svc-arr{display:none;}
 
 /* ═══ MEMBERSHIP ════════════════════════════════════ */
 #membership{padding:100px 52px;background:var(--b1);border-bottom:1px solid rgba(181,255,0,.06);}
@@ -226,6 +236,14 @@ nav.scrolled{background:rgba(0,0,0,.93);backdrop-filter:blur(20px);border-bottom
 .prog-card:first-child .prog-name{font-size:32px;}
 .prog-desc{font-size:12px;line-height:1.65;color:rgba(244,244,240,.68);}
 .prog-num{position:absolute;top:18px;left:18px;font-family:'Syne',sans-serif;font-size:60px;font-weight:800;-webkit-text-stroke:1px rgba(181,255,0,.25);color:transparent;line-height:1;pointer-events:none;z-index:2;}
+
+/* ═══ TRANSFORMATIONS ═══════════════════════════════ */
+#transformations{padding:100px 52px;background:var(--b1);border-bottom:1px solid rgba(181,255,0,.06);}
+.tf-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.tf-card{position:relative;overflow:visible;aspect-ratio:3/4;background:#000;}
+.tf-media{width:100%;height:100%;overflow:hidden;border:1px solid rgba(181,255,0,.14);background:#000;}
+.tf-media img{width:100%;height:100%;object-fit:contain;object-position:center;display:block;transition:transform .5s ease;}
+.tf-card:hover .tf-media img{transform:scale(1.05);}
 
 /* ═══ WHY US ════════════════════════════════════════ */
 #why{padding:100px 52px;background:var(--b1);border-bottom:1px solid rgba(181,255,0,.06);}
@@ -308,7 +326,7 @@ nav.scrolled{background:rgba(0,0,0,.93);backdrop-filter:blur(20px);border-bottom
 
 /* ═══ CTA BAND ══════════════════════════════════════ */
 #cta .cta-band{background:var(--lime);padding:80px 52px;display:flex;align-items:center;justify-content:space-between;gap:48px;position:relative;overflow:hidden;}
-#cta .cta-band::before{content:'OXYGEN';position:absolute;right:-60px;top:50%;transform:translateY(-50%);font-family:'Syne',sans-serif;font-size:20vw;font-weight:800;color:rgba(0,0,0,.07);line-height:1;pointer-events:none;white-space:nowrap;}
+#cta .cta-band::before{content:'OXYGEN';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:'Syne',sans-serif;font-size:clamp(120px,16vw,300px);font-weight:800;color:rgba(0,0,0,.07);line-height:1;pointer-events:none;white-space:nowrap;}
 .cta-text h2{font-family:'Syne',sans-serif;font-size:clamp(32px,4.5vw,54px);font-weight:800;text-transform:uppercase;letter-spacing:-2px;color:var(--black);line-height:.92;margin-bottom:14px;}
 .cta-text p{font-size:14px;color:rgba(0,0,0,.58);max-width:480px;line-height:1.65;}
 .cta-acts{display:flex;flex-direction:column;gap:14px;align-items:flex-start;flex-shrink:0;position:relative;z-index:1;}
@@ -341,7 +359,7 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
 
 /* ═══ RESPONSIVE ════════════════════════════════════ */
 @media(max-width:1200px){
-  nav,#about,#services,#membership,#programs,#why,#reviews,#cta .cta-band,footer{padding-left:36px;padding-right:36px;}
+  nav,#about,#services,#membership,#programs,#transformations,#why,#reviews,#cta .cta-band,footer{padding-left:36px;padding-right:36px;}
   .hero-l-inner{padding-left:36px;}
   .hero-scroll{left:50%;}
 }
@@ -360,9 +378,11 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
   #about{grid-template-columns:1fr;}
   .about-r{display:none;}
   .sec-head,.programs-header,.why-grid>.why-l+*,footer .foot-top{gap:32px;}
+  .svc-list{grid-template-columns:1fr 1fr;column-gap:20px;}
   .plans-grid{grid-template-columns:1fr 1fr;gap:2px;}
   .prog-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
   .prog-grid .prog-card{height:300px;}
+  .tf-grid{grid-template-columns:repeat(2,1fr);}
   .why-grid{grid-template-columns:1fr;}
   .r-card{flex-basis:340px;max-width:340px;}
   .foot-top{grid-template-columns:1fr;gap:40px;}
@@ -377,7 +397,8 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
   .nav-logo-sq{height:34px;}
   .nav-logo-sq img{height:34px;max-width:150px;}
   .mob-drawer{top:64px;}
-  #about,#services,#membership,#programs,#why,#reviews{padding:64px 20px;}
+  #about,#services,#membership,#programs,#transformations,#why,#reviews{padding:64px 20px;}
+  .tf-grid{grid-template-columns:1fr;}
   #cta .cta-band{padding:56px 20px;}
   footer{padding:56px 20px 28px;}
   .hero-l-inner{padding:110px 20px 0;}
@@ -386,6 +407,7 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
   .prog-grid .prog-card{height:260px;}
   .r-card{flex-basis:300px;max-width:300px;}
   .svc-row{grid-template-columns:60px 1fr;gap:16px;}
+  .svc-list{grid-template-columns:1fr;}
   .svc-arr{display:none;}
   .photo-strip{grid-template-columns:1fr 1fr;height:auto;}
   .strip-c{height:150px;}
@@ -402,7 +424,7 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
   .hero-stats{flex-wrap:wrap;}
   .hstat{flex:1 1 calc(50% - 1px);}
   .hstat-n{font-size:22px;}
-  #about,#services,#membership,#programs,#why,#reviews{padding:56px 16px;}
+  #about,#services,#membership,#programs,#transformations,#why,#reviews{padding:56px 16px;}
   #cta .cta-band{padding:44px 16px;}
   footer{padding:48px 16px 24px;}
   .join-wrap{padding:24px 16px 40px;max-height:93svh;}
@@ -434,7 +456,7 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
     </div>
     <div class="nav-brand-text">
       <span class="nav-name">Oxygen Gym</span>
-      <span class="nav-sub">Veluthamanal · Karunagappalli</span>
+      <span class="nav-sub">Veluthamanal · Karunagappally</span>
     </div>
   </a>
   <ul class="nav-ul">
@@ -442,6 +464,7 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
     <li><a href="#services">Services</a></li>
     <li><a href="#membership">Plans</a></li>
     <li><a href="#programs">Programs</a></li>
+    <li><a href="#transformations">Transformations</a></li>
     <li><a href="#why">Why Us</a></li>
     <li><a href="#reviews">Reviews</a></li>
     <li><a href="#" class="nav-join open-join">Join Now</a></li>
@@ -458,6 +481,7 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
     <li><a href="#services" class="mob-link">Services</a></li>
     <li><a href="#membership" class="mob-link">Plans</a></li>
     <li><a href="#programs" class="mob-link">Programs</a></li>
+    <li><a href="#transformations" class="mob-link">Transformations</a></li>
     <li><a href="#why" class="mob-link">Why Us</a></li>
     <li><a href="#reviews" class="mob-link">Reviews</a></li>
   </ul>
@@ -474,32 +498,38 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
 <section id="hero">
   <div class="hero-l">
     <div class="hero-l-inner">
-      <div class="hero-eyebrow">Premium Unisex Fitness Centre — Veluthamanal</div>
+      <div class="hero-eyebrow">Premium Unisex Fitness Centre — Veluthamanal, Karunagappally</div>
       <h1 class="hero-h1">
         PUSH<br>
         <span class="lime">BEYOND</span>
         <span class="stroke">LIMITS.</span>
       </h1>
-      <p class="hero-copy">A highly-rated professional fitness centre at Veluthamanal junction, Karunagappalli — expert coaches, modern equipment, and an inclusive wheelchair-accessible space. Open every day.</p>
+      <p class="hero-copy">A highly-rated professional fitness centre/ Gym at Veluthamanal junction, Karunagappalli — expert coaches, modern equipment, and an inclusive wheelchair-accessible space.</p>
       <div class="hero-actions">
         <a href="#" class="btn-lime open-join">Start Training <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
         <a href="#services" class="btn-ghost-w">Explore →</a>
       </div>
       <div class="hero-stats">
-        <div class="hstat"><div class="hstat-n">4.8★</div><div class="hstat-l">Google<br>Rating</div></div>
-        <div class="hstat"><div class="hstat-n">7</div><div class="hstat-l">Days<br>Open</div></div>
-        <div class="hstat"><div class="hstat-n">5AM</div><div class="hstat-l">Early<br>Start</div></div>
-        <div class="hstat"><div class="hstat-n">♿</div><div class="hstat-l">Fully<br>Accessible</div></div>
+        <div class="hstat"><div class="hstat-n">5★</div><div class="hstat-l">Google Rating</div></div>
+        <div class="hstat"><div class="hstat-n">7</div><div class="hstat-l">Days Open</div></div>
+        <div class="hstat"><div class="hstat-n">5AM</div><div class="hstat-l">Early Start</div></div>
+        <div class="hstat">
+          <div class="hstat-n hstat-n-icon">
+            <svg class="hstat-wheel" viewBox="0 0 24 24" aria-hidden="true">
+              <circle class="wheel-circle" cx="8.5" cy="15.5" r="5.2"/>
+              <path class="wheel-lines" d="M12 7h4.2M12 7l-1.2 4.2h4.4l2.6 5.3M8 6.2a1.5 1.5 0 1 0 0-.01"/>
+            </svg>
+          </div>
+          <div class="hstat-l">Wheelchair Accessible</div>
+        </div>
       </div>
     </div>
   </div>
   <div class="hero-r">
-    <div class="hero-r-img"></div>
+    <div class="hero-r-img img-1"></div>
+    <div class="hero-r-img img-2"></div>
+    <div class="hero-r-img img-3"></div>
     <div class="hero-r-grad"></div>
-    <div class="hero-badge">
-      <span class="bn">4.8</span>
-      <span class="bs">Rated on<br>Google</span>
-    </div>
   </div>
   <div class="hero-scroll">
     <div class="scroll-bar"></div>
@@ -514,7 +544,7 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
     <span class="ticker-item">Expert Certified Trainers<span class="ticker-dot"></span></span>
     <span class="ticker-item">Open 7 Days a Week<span class="ticker-dot"></span></span>
     <span class="ticker-item">Wheelchair Accessible<span class="ticker-dot"></span></span>
-    <span class="ticker-item">Personal Training Available<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Best Gym in Karunagappally<span class="ticker-dot"></span></span>
     <span class="ticker-item">Modern Equipment<span class="ticker-dot"></span></span>
     <span class="ticker-item">Veluthamanal · Karunagappalli · Kerala<span class="ticker-dot"></span></span>
     <span class="ticker-item">Strength · Cardio · Fitness<span class="ticker-dot"></span></span>
@@ -525,7 +555,7 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
     <span class="ticker-item">Personal Training Available<span class="ticker-dot"></span></span>
     <span class="ticker-item">Modern Equipment<span class="ticker-dot"></span></span>
     <span class="ticker-item">Veluthamanal · Karunagappalli · Kerala<span class="ticker-dot"></span></span>
-    <span class="ticker-item">Strength · Cardio · Fitness<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Top rated Gym in Karunagappally<span class="ticker-dot"></span></span>
   </div>
 </div>
 
@@ -534,7 +564,8 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
   <div class="rev-l">
     <div class="s-label">About Us</div>
     <h2 class="about-title">Where Every<br><span>Breath</span> Fuels<br>Your Best.</h2>
-    <p class="about-body">Oxygen Gym is a highly-rated, professional unisex fitness centre at Veluthamanal junction, Engineering College Road, Karunagappalli. Built for people serious about results — certified trainers, well-maintained modern equipment, and a training floor that pushes you forward every session.<br><br>Proudly inclusive: fully wheelchair-accessible, welcoming every member of the community. Open seven days a week, from early morning to late evening.</p>
+    <p class="about-body">About Oxygen Gym
+      Located in the heart of Veluthamanal, Karunagappally, Oxygen Gym is a premier 5-star fitness destination designed for those who demand excellence. Our state-of-the-art, fully air-conditioned facility combines a high-energy "billionaire vibe" with elite equipment, creating a modern and motivating environment for every member of the community.<br><br>Whether your goal is weight management, professional bodybuilding, or overall wellness, our expert, supportive trainers provide the personalized guidance you need to succeed. We pride ourselves on maintaining a clean, inclusive, and professional space where beginners and athletes alike can breathe life into their fitness journey and achieve lasting transformations.</p>
     <div class="chips">
       <span class="chip">Unisex Facility</span>
       <span class="chip">Certified Trainers</span>
@@ -547,9 +578,9 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
   </div>
   <div class="about-r rev-r">
     <div class="a-corner"></div>
-    <img src="Interiror/int3.webp" alt="Oxygen Gym interior Veluthamanal" class="a-img-main" loading="lazy">
+    <img src="Interiror/66.png" alt="Oxygen Gym interior Veluthamanal" class="a-img-main" loading="lazy">
     <img src="logo.png" alt="Oxygen Gym logo" class="a-img-thumb" loading="lazy">
-    <div class="a-float"><span class="fn">4.8</span><span class="fl">Google<br>Rating</span></div>
+    <div class="a-float"><span class="fn">5★</span><span class="fl">Google<br>Rating</span></div>
   </div>
 </section>
 
@@ -560,12 +591,18 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
     <a href="#" class="btn-outline open-join">Enquire Now</a>
   </div>
   <div class="svc-list">
-    <div class="svc-row rev"><span class="svc-n">01</span><div class="svc-body"><h3 class="svc-name">Strength Training</h3><p class="svc-desc">Build real, lasting strength with our complete range of free weights, cable machines, barbells, and certified coach-led programming for all levels.</p></div><div class="svc-arr"><svg viewBox="0 0 24 24"><path d="M5 12h14M14 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
-    <div class="svc-row rev" style="transition-delay:.07s"><span class="svc-n">02</span><div class="svc-body"><h3 class="svc-name">Cardio & Endurance</h3><p class="svc-desc">Improve stamina and burn fat with modern cardio machines and structured endurance programs suited for every fitness level and goal.</p></div><div class="svc-arr"><svg viewBox="0 0 24 24"><path d="M5 12h14M14 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
-    <div class="svc-row rev" style="transition-delay:.14s"><span class="svc-n">03</span><div class="svc-body"><h3 class="svc-name">Personal Training</h3><p class="svc-desc">One-on-one sessions with dedicated trainers who craft a custom plan around your goals, schedule, and current fitness level.</p></div><div class="svc-arr"><svg viewBox="0 0 24 24"><path d="M5 12h14M14 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
-    <div class="svc-row rev" style="transition-delay:.21s"><span class="svc-n">04</span><div class="svc-body"><h3 class="svc-name">Weight Management</h3><p class="svc-desc">Science-backed training protocols combined with lifestyle and nutrition guidance to help you reach and maintain your ideal weight long-term.</p></div><div class="svc-arr"><svg viewBox="0 0 24 24"><path d="M5 12h14M14 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
-    <div class="svc-row rev" style="transition-delay:.28s"><span class="svc-n">05</span><div class="svc-body"><h3 class="svc-name">Functional Fitness</h3><p class="svc-desc">Improve mobility, core stability, and movement quality with functional training that translates directly to real-life performance.</p></div><div class="svc-arr"><svg viewBox="0 0 24 24"><path d="M5 12h14M14 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
-    <div class="svc-row rev" style="transition-delay:.35s"><span class="svc-n">06</span><div class="svc-body"><h3 class="svc-name">Diet & Nutrition</h3><p class="svc-desc">Complement workouts with proper nutrition advice from our trainers. Build sustainable eating habits that amplify your results inside and outside the gym.</p></div><div class="svc-arr"><svg viewBox="0 0 24 24"><path d="M5 12h14M14 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+    <div class="svc-row rev"><span class="svc-n">01</span><div class="svc-body"><h3 class="svc-name">Hard-Core Body Building</h3><p class="svc-desc">Intense muscle-building workouts for advanced members aiming for competitive-level strength and physique development.</p></div><div class="svc-arr"><svg viewBox="0 0 24 24"><path d="M5 12h14M14 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+    <div class="svc-row rev" style="transition-delay:.05s"><span class="svc-n">02</span><div class="svc-body"><h3 class="svc-name">Body Building</h3><p class="svc-desc">Structured bodybuilding routines with proper form guidance, progressive overload, and equipment-based muscle training.</p></div><div class="svc-arr"><svg viewBox="0 0 24 24"><path d="M5 12h14M14 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+    <div class="svc-row rev" style="transition-delay:.1s"><span class="svc-n">03</span><div class="svc-body"><h3 class="svc-name">Fitness Training</h3><p class="svc-desc">General fitness plans that improve strength, flexibility, endurance, and overall health for all age groups.</p></div><div class="svc-arr"><svg viewBox="0 0 24 24"><path d="M5 12h14M14 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+    <div class="svc-row rev" style="transition-delay:.15s"><span class="svc-n">04</span><div class="svc-body"><h3 class="svc-name">Personal Training</h3><p class="svc-desc">One-on-one coaching tailored to your goals, lifestyle, and current fitness level with close trainer supervision.</p></div><div class="svc-arr"><svg viewBox="0 0 24 24"><path d="M5 12h14M14 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+    <div class="svc-row rev" style="transition-delay:.2s"><span class="svc-n">05</span><div class="svc-body"><h3 class="svc-name">Cardio Exercise</h3><p class="svc-desc">Cardio programs to improve stamina, heart health, and calorie burn using treadmill, cycle, and functional circuits.</p></div><div class="svc-arr"><svg viewBox="0 0 24 24"><path d="M5 12h14M14 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+    <div class="svc-row rev" style="transition-delay:.25s"><span class="svc-n">06</span><div class="svc-body"><h3 class="svc-name">Run Fitness</h3><p class="svc-desc">Running-focused conditioning sessions to improve speed, endurance, recovery, and race preparation.</p></div><div class="svc-arr"><svg viewBox="0 0 24 24"><path d="M5 12h14M14 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+    <div class="svc-row rev" style="transition-delay:.3s"><span class="svc-n">07</span><div class="svc-body"><h3 class="svc-name">Weight Loss and Gain Programs</h3><p class="svc-desc">Goal-based programs combining workout strategy and nutrition support for healthy weight reduction or lean mass gain.</p></div><div class="svc-arr"><svg viewBox="0 0 24 24"><path d="M5 12h14M14 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+    <div class="svc-row rev" style="transition-delay:.35s"><span class="svc-n">08</span><div class="svc-body"><h3 class="svc-name">Diet Counseling</h3><p class="svc-desc">Practical meal guidance to support body composition goals, performance, and long-term healthy habits.</p></div><div class="svc-arr"><svg viewBox="0 0 24 24"><path d="M5 12h14M14 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+    <div class="svc-row rev" style="transition-delay:.4s"><span class="svc-n">09</span><div class="svc-body"><h3 class="svc-name">Zumba Classes</h3><p class="svc-desc">Fun, high-energy dance fitness sessions to improve cardio endurance, mobility, and calorie burn.</p></div><div class="svc-arr"><svg viewBox="0 0 24 24"><path d="M5 12h14M14 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+    <div class="svc-row rev" style="transition-delay:.45s"><span class="svc-n">10</span><div class="svc-body"><h3 class="svc-name">Swiss &amp; Medical Ball Exercise</h3><p class="svc-desc">Core stability and functional movement workouts using swiss balls and medical balls for better balance and power.</p></div><div class="svc-arr"><svg viewBox="0 0 24 24"><path d="M5 12h14M14 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+    <div class="svc-row rev" style="transition-delay:.5s"><span class="svc-n">11</span><div class="svc-body"><h3 class="svc-name">Locker Facility</h3><p class="svc-desc">Secure locker access for safe storage of your belongings during workouts.</p></div><div class="svc-arr"><svg viewBox="0 0 24 24"><path d="M5 12h14M14 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+    <div class="svc-row rev" style="transition-delay:.55s"><span class="svc-n">12</span><div class="svc-body"><h3 class="svc-name">Plyometric Workout</h3><p class="svc-desc">Explosive training sessions to build power, agility, coordination, and athletic performance.</p></div><div class="svc-arr"><svg viewBox="0 0 24 24"><path d="M5 12h14M14 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
   </div>
 </section>
 
@@ -661,6 +698,20 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
   </div>
 </section>
 
+<!-- TRANSFORMATION GALLERY -->
+<section id="transformations">
+  <div class="sec-head rev">
+    <div><div class="s-label">Results</div><h2 class="sec-title">Transformation Gallery</h2></div>
+    <a href="#" class="btn-outline open-join">Start Your Transformation</a>
+  </div>
+  <div class="tf-grid rev">
+    <div class="tf-card"><div class="tf-media"><img src="Transformations/t1.png" alt="Member fitness transformation 1" loading="lazy"></div></div>
+    <div class="tf-card"><div class="tf-media"><img src="Transformations/t2.png" alt="Member fitness transformation 2" loading="lazy"></div></div>
+    <div class="tf-card"><div class="tf-media"><img src="Transformations/t3.png" alt="Member fitness transformation 3" loading="lazy"></div></div>
+    <div class="tf-card"><div class="tf-media"><img src="Transformations/t4.png" alt="Member fitness transformation 4" loading="lazy"></div></div>
+  </div>
+</section>
+
 <!-- WHY US -->
 <section id="why">
   <div class="why-grid">
@@ -697,7 +748,7 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
 
 <!-- PHOTO STRIP -->
 <div class="photo-strip">
-  <div class="strip-c"><img src="Interiror/int7.webp" alt="Oxygen Gym" loading="lazy"></div>
+  <div class="strip-c"><img src="Interiror/int7.png" alt="Oxygen Gym" loading="lazy"></div>
   <div class="strip-c"><img src="Interiror/4.png" alt="Oxygen Gym equipment" loading="lazy"></div>
   <div class="strip-c"><img src="Interiror/3.png" alt="Oxygen Gym training" loading="lazy"></div>
   <div class="strip-c"><img src="Interiror/5.png" alt="Oxygen Gym floor" loading="lazy"></div>
@@ -734,7 +785,7 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
     <h3 class="join-h">Join <span>Oxygen</span><br>Gym Today.</h3>
     <p class="join-sub">Fill in your details and we'll follow up on WhatsApp to confirm your membership and start date.</p>
     <form id="leadForm" novalidate>
-      <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY">
+      <input type="hidden" name="access_key" value="5c7bf0bc-51df-461c-8597-61e0588ff836">
       <input type="hidden" name="subject" value="New Membership Enquiry — Oxygen Gym Veluthamanal">
       <input type="hidden" name="from_name" value="Oxygen Gym Website">
       <input type="hidden" id="leadPlan" name="Selected Plan" value="">
@@ -760,8 +811,8 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
 <section id="cta">
   <div class="cta-band rev">
     <div class="cta-text">
-      <h2>Ready to Start<br>Breathing<br>Better?</h2>
-      <p>Join Oxygen Gym — professional, inclusive fitness in Veluthamanal, Karunagappalli. Open every day, from early morning to late evening.</p>
+      <h2>READY FOR <br> AN ELITE<br>TRANSFORMATION?</h2>
+      <p>Join Oxygen Gym — Karunagappally’s premier 5-star fitness center in Veluthamanal. Experience elite coaching and world-class equipment, open daily for your transformation.</p>
     </div>
     <div class="cta-acts">
       <a href="#" class="btn-black open-join">Join Today <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
@@ -781,7 +832,7 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
         <img src="./logo.png" alt="Oxygen Gym logo" class="foot-logo" loading="lazy">
         <span class="foot-brand">OXYGEN<span> GYM</span></span>
       </div>
-      <p class="foot-tag">A highly-rated premium unisex fitness centre at Veluthamanal junction, Karunagappalli. Professional trainers, modern equipment, fully wheelchair-accessible.</p>
+      <p class="foot-tag">A highly-rated premium unisex fitness centre at Veluthamanal junction, Karunagappally. Professional trainers, modern equipment, fully wheelchair-accessible.</p>
       <div class="fi"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:2px"><path d="M7 1C4.2 1 2 3.2 2 6C2 9.5 7 13 7 13S12 9.5 12 6C12 3.2 9.8 1 7 1Z" stroke="#b5ff00" stroke-width="1.1"/><circle cx="7" cy="6" r="1.8" stroke="#b5ff00" stroke-width="1.1"/></svg><span>3H93+FVJ, Veluthamanal jn, Engineering College Rd, Karunagappalli, Kallelibhagom, Kerala 690523</span></div>
       <div class="fi"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:2px"><path d="M2.5 2.5L4 1.5C4.5 3 5 4.5 5 5C4.5 5.5 4 6 4.5 7C5 8 6 9 7 9.5C8 10 8.5 9.5 9 9C9.5 8.5 11 9 12.5 9.5L11.5 11C9.5 12 7 11.5 4.5 9C2 6.5 1.5 4 2.5 2.5Z" stroke="#b5ff00" stroke-width="1.1"/></svg><a href="tel:+916238159885">+91 62381 59885</a></div>
       <div class="fi"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:2px"><circle cx="7" cy="7" r="5.5" stroke="#b5ff00" stroke-width="1.1"/><path d="M7 4v3.5L9 9" stroke="#b5ff00" stroke-width="1.1" stroke-linecap="round"/></svg><span>Mon–Fri &amp; Sun: 5:00 AM – 9:30 PM &nbsp;·&nbsp; Sat: 4:50 AM – 10:30 PM</span></div>
@@ -794,7 +845,7 @@ footer{background:var(--b1);padding:76px 52px 36px;border-top:1px solid rgba(181
   </div>
   <div class="foot-bottom">
     <p class="foot-copy">© 2026 Oxygen Gym Veluthamanal. Premium Unisex Fitness Centre, Karunagappalli, Kerala.</p>
-    <div class="foot-links"><a href="#about">About</a><a href="#membership">Plans</a><a href="#why">Why Us</a><a href="tel:+916238159885">Call</a><a href="https://wa.me/916238159885" target="_blank" rel="noopener noreferrer">WhatsApp</a></div>
+    <div class="foot-links"><a href="#about">About</a><a href="#membership">Plans</a><a href="#transformations">Transformations</a><a href="#why">Why Us</a><a href="tel:+916238159885">Call</a><a href="https://wa.me/916238159885" target="_blank" rel="noopener noreferrer">WhatsApp</a></div>
   </div>
 </footer>
 
